@@ -58,7 +58,6 @@ public class ExcelTable {
         }
     }
 
-
     private void setTableToNode() {
         HBox[] row = new HBox[table.length + 1];
         row[0] = new HBox(getHorizontalIndex());
