@@ -7,15 +7,19 @@ import net.objecthunter.exp4j.ExpressionBuilder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.regex.Pattern;
 
 public class ExcelTableViewModel {
 
-    private final String[][] table;
+    public final String[][] table;
     public final SimpleObjectProperty<String>[][] tableValue;
 
     public ExcelTableViewModel(int size) {
         table = new String[size][size];
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                table[i][j] = new String();
+            }
+        }
         tableValue = new SimpleObjectProperty[size][size];
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
@@ -30,7 +34,7 @@ public class ExcelTableViewModel {
             if (strings.get(k).matches("[A-Z]+[0-9]+")) {
                 String firstIndex = strings.get(k).replaceAll("\\D", "");
                 String secondIndex = strings.get(k).replaceAll("\\d", "");
-                strings.set(k,tableValue[Integer.parseInt(firstIndex) - 1][secondIndex.charAt(0) - 65].getValue());
+                strings.set(k, table[Integer.parseInt(firstIndex) - 1][secondIndex.charAt(0) - 65]);
             }
         }
 
@@ -46,9 +50,9 @@ public class ExcelTableViewModel {
         }
 
         if (value.endsWith("=")) {
-            System.out.println(resString);
             tableValue[i][j].setValue(calculateValue(resString.toString()));
         } else {
+            table[i][j] = value;
             tableValue[i][j].setValue(value);
         }
     }

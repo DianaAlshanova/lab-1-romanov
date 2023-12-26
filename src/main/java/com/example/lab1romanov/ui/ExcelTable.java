@@ -39,6 +39,12 @@ public class ExcelTable {
                 final int secondIndex = j;
                 table[i][j].textProperty().addListener((observableValue, oldValue, newValue) -> {
                     viewModel.updateTableValue(newValue, firstIndex, secondIndex);
+                    if (newValue.endsWith("=")) {
+                        root.requestFocus();
+                    }
+                });
+                table[i][j].focusedProperty().addListener((observableValue, aBoolean, t1) -> {
+                    table[firstIndex][secondIndex].setText(viewModel.table[firstIndex][secondIndex]);
                 });
             }
         }

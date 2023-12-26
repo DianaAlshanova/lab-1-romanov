@@ -16,7 +16,7 @@ public class ExcelViewModel implements Initializable {
     @FXML
     private ScrollPane scrollPane;
 
-    private final ExcelTable table = new ExcelTable(6);
+    private final ExcelTable table = new ExcelTable(8);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
